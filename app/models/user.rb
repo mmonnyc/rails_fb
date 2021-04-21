@@ -6,7 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validate :picture_size
   has_many :posts
-  
+  has_many :comments
+
   private 
 
   def picture_size

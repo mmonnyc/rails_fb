@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comments/new'
+  get 'comments/create'
   get 'posts/index'
   get 'posts/show'
   get 'posts/new'
