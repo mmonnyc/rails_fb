@@ -15,4 +15,23 @@ module ApplicationHelper
     Post.find(comment.post_id)
   end
 
+  def already_liked?(subject, type)
+    result = false
+    if type == 'post'
+      result = Like.where(user_id: current_user.id, post_id: subject.id).exists?
+    end
+    if type == 'comment'
+      result = Like.where(user_id: current_user.id, comment_id: subject.id).exists?
+    end
+    result
+  end
+
+  def friend_request_sent?(user)
+    current_user.friend_sent.exists?(sent_to_id: user.id, status: false)
+  end
+
+  def friend_request_received?(user)
+    current_user.friend_request.exists?(sent_by_id: user.id, status: false)
+  end
+
 end

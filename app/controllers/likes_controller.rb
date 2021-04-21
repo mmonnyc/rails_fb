@@ -6,7 +6,7 @@ class LikesController < ApplicationController
     @subject = type_subject?(params)[1]
     notice_type = "like-#{type}"
     return unless @subject
-    if already_liked?(type)
+    if already_liked?(@subject, type)
       dislike(type)
     else
       @like = @subject.likes.build(user_id: current_user.id)
@@ -29,17 +29,6 @@ class LikesController < ApplicationController
     subject = Post.find(params[:post_id]) if type == 'post'
     subject = Comment.find(params[:comment_id]) if type == 'comment'
     [type, subject]
-  end
-
-  def already_liked?(type)
-    result = false
-    if type == 'post'
-      result = Like.where(user_id: current_user.id, post_id: params[:post_id]).exists?
-    end
-    if type == 'comment'
-      result = Like.where(user_id: current_user.id, comment_id: params[:comment_id]).exists?
-    end
-    result
   end
 
   def dislike(type)
