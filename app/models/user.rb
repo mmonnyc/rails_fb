@@ -18,8 +18,10 @@ class User < ApplicationRecord
                           foreign_key: 'sent_to_id',
                           inverse_of: 'sent_to',
                           dependent: :destroy
-  has_many :friends, -> { merge(Friendship.friends) },
+  has_many :friendships, -> { merge(Friendship.friends) },
             through: :friend_sent, source: :sent_to
+  has_many :inverse_friendships, -> { merge(Friendship.friends) },
+            through: :friend_request, source: :sent_by
   has_many :pending_requests, -> { merge(Friendship.not_friends) },
             through: :friend_sent, source: :sent_to
   has_many :received_requests, -> { merge(Friendship.not_friends) },
@@ -41,6 +43,12 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def friends 
+    friends_array = friendships.map { |f| f.sent_by if f.friends? }
+    friends_array + inverse_friendships.map{ |f| f.sent_to if f.friends? }
+    friends_array.compact
   end
 
   private 
