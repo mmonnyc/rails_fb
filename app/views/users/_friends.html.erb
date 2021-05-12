@@ -1,16 +1,77 @@
-<% current_user.friends.each do |friend| %>
-    <div class="box">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-          </figure>
+<div class="block">
+  <strong>Pending Friend Requests</strong>
+  <br><br>
+  <% if current_user.pending_requests.any? %>
+    <% current_user.pending_requests.each do |friend| %>
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <%= friend.full_name %>
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="media-content">
-          <div class="content">
-            <%= friend.full_name %>
+    <% end %>
+  <% else %>
+    <p>You don't have any new requests at the moment</p>
+  <% end %>
+</div>
+
+<div class="block">
+  <strong>Your Friends List</strong>
+  <br><br>
+  <% current_user.friends.each do |friend| %>
+      <div class="box">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+            </figure>
           </div>
-        </div>
-      </article>
-    </div>
-<% end %>
+          <div class="media-content">
+            <div class="content">
+              <%= friend.full_name %>
+            </div>
+          </div>
+        </article>
+      </div>
+  <% end %>
+</div>
+
+<div class="block">
+  <strong>Other Users</strong>
+  <br><br>
+  <% @users.each do |user| %>
+    <% if current_user.id != user.id%>
+      <% unless potential_friends?(user) %>
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <nav class="level">
+                <div class="level-left">
+                  <div class="level-item"><%= user.full_name %></div>
+                </div>
+                <div class="level-right">
+                  <p class="control">
+                    <%= link_to "Send Friend Request", user_friendships_path(user), method: :post, class: "button is-light" %>
+                  </p>
+                </div>
+              </nav>
+            </div>
+          </article>
+        </div> 
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

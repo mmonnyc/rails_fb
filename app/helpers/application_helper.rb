@@ -27,11 +27,18 @@ module ApplicationHelper
   end
 
   def friend_request_sent?(user)
-    current_user.friend_sent.exists?(sent_to_id: user.id, status: false)
+    current_user.friendships.exists?(sent_to_id: user.id, status: false)
   end
 
   def friend_request_received?(user)
-    current_user.friend_request.exists?(sent_by_id: user.id, status: false)
+    current_user.inverse_friendships.exists?(sent_by_id: user.id, status: false)
   end
-
+  
+  def potential_friends?(user)
+    return true if friend_request_sent?(user)
+    return true if friend_request_received?(user)
+    return true if current_user.friendships.exists?(sent_to_id: user.id, status: true)
+    return true if current_user.inverse_friendships.exists?(sent_by_id: user.id, status: true)
+    return false
+  end
 end
