@@ -1,4 +1,4 @@
-<%= simple_form_for(Comment.new, url: new_post_comment_path(post)) do |f| %>
+<%= simple_form_for(Comment.new, url: post_comments_path(post)) do |f| %>
 <%= f.error_notification %>
 <div class="field">
   <div class="control">
