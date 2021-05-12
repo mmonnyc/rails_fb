@@ -10,22 +10,14 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  has_many :friend_sent, class_name: 'Friendship',
+  has_many :friendships, class_name: 'Friendship',
                           foreign_key: 'sent_by_id',
-                          inverse_of: 'sent_by',
+                          # inverse_of: 'sent_to',
                           dependent: :destroy
-  has_many :friend_request, class_name: 'Friendship',
+  has_many :inverse_friendships, class_name: 'Friendship',
                           foreign_key: 'sent_to_id',
-                          inverse_of: 'sent_to',
+                          # inverse_of: 'sent_by',
                           dependent: :destroy
-  has_many :friendships, -> { merge(Friendship.friends) },
-            through: :friend_sent, source: :sent_to
-  has_many :inverse_friendships, -> { merge(Friendship.friends) },
-            through: :friend_request, source: :sent_by
-  has_many :pending_requests, -> { merge(Friendship.not_friends) },
-            through: :friend_sent, source: :sent_to
-  has_many :received_requests, -> { merge(Friendship.not_friends) },
-            through: :friend_request, source: :sent_by
   
   def my_feed_posts
     my_friends = self.friends
@@ -46,9 +38,17 @@ class User < ApplicationRecord
   end
 
   def friends
-    friends_array = friendships.map { |f| f.sent_by if f.status? }
-    friends_array + inverse_friendships.map{ |f| f.sent_to if f.status? }
+    friends_array = friendships.map{ |f| f.sent_to if f.status } + inverse_friendships.map{ |f| f.sent_by if f.status }
     friends_array.compact
+  end
+
+  # Users sent requests to other friends
+  def pending_requests
+    friendships.map{ |f| f.sent_by if !f.status}.compact
+  end
+  # Friend requests for the user 
+  def friend_requests
+    inverse_friendships.map{ |f| f.sent_to if !f.status}.compact
   end
 
   private 

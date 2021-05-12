@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "users#index"
+  root "posts#index"
   devise_for :users
   
   resources :users, only: [:index, :show] do
@@ -8,9 +8,6 @@ Rails.application.routes.draw do
         get 'accept_friend'
         get 'decline_friend'
       end
-    end
-    member do
-      get 'friends'
     end
   end
 
