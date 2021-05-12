@@ -17,18 +17,15 @@
     <% if post.comments.any? %>
       <%= render 'comments/comments', { comments: post.comments }%>
     <% end %>
-    
-    
-  </div>
-</article>
-
-<article class="media">
-  <figure class="media-left">
-    <p class="image is-64x64">
-      <img src="https://bulma.io/images/placeholders/128x128.png">
-    </p>
-  </figure>
-  <div class="media-content">
-    <%= render 'comments/form', { post: post } %>
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-48x48">
+          <img src="https://bulma.io/images/placeholders/128x128.png">
+        </p>
+      </figure>
+      <div class="media-content">
+        <%= render 'comments/form', { post: post } %>
+      </div>
+    </article>  
   </div>
 </article>
