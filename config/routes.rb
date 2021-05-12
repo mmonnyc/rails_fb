@@ -9,6 +9,9 @@ Rails.application.routes.draw do
         get 'decline_friend'
       end
     end
+    member do
+      get 'friends'
+    end
   end
 
   put '/users/:id', to: 'users#update_img'
@@ -19,5 +22,5 @@ Rails.application.routes.draw do
   resources :comments, only: [:new, :create, :destroy] do
     resources :likes, only: [:create]
   end
-  
+
 end

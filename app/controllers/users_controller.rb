@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       if @user.save
         flash[:success] = 'Image uploaded'
       else
-        flash[:danger] = 'Image uploaded failed'
+        flash[:danger] = 'Image upload failed'
       end
     end
     redirect_back(fallback_location: root_path)

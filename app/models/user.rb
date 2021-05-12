@@ -5,8 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validate :picture_size
-  has_many :posts
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
@@ -28,7 +28,7 @@ class User < ApplicationRecord
             through: :friend_request, source: :sent_by
   
   def my_feed_posts
-    my_friends = friends
+    my_friends = self.friends
     my_feed_posts = []
     my_friends.each do |f|
       f.posts.each do |p|
@@ -45,9 +45,9 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def friends 
-    friends_array = friendships.map { |f| f.sent_by if f.friends? }
-    friends_array + inverse_friendships.map{ |f| f.sent_to if f.friends? }
+  def friends
+    friends_array = friendships.map { |f| f.sent_by if f.status? }
+    friends_array + inverse_friendships.map{ |f| f.sent_to if f.status? }
     friends_array.compact
   end
 

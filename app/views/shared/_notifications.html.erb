@@ -1,0 +1,29 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <% object.each do |n| %>
+    
+    <% if n.notice_type == "friendRequest" %>
+      <% user = notification_find(n, 'friendRequest') %>
+      <%= '#{user.full_name} just sent you a Friend Request' %> <!-- need a link--->
+    <% end %>
+    <% if n.notice_type == "comment" %>
+      <% link_to post_path(notification_find(n, 'comment')) do %>
+       Someone commented on your Post
+      <% end %>
+    <% end %>
+    <% if n.notice_type == "like-comment" %>
+      <% link_to post_path(notification_find(n, 'like-comment')) do %>
+       Someone liked your Comment
+      <% end %>
+    <% end %>
+    <% if n.notice_type == "like-post" %>
+      <% link_to post_path(notification_find(n, 'like-post')) do %>
+       Someone liked your Post
+      <% end %>
+    <% end %>
+    <% end %>
+  
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>

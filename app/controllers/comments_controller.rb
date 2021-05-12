@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
   include ApplicationHelper
   
+  def index
+    @comments = Comments.all
+  end
+  
   def new
     @comment = Comment.new
   end
