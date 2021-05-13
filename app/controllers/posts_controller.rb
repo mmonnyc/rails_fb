@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @feed_posts = current_user.my_feed_posts
+    @post = Post.new
   end
 
   def show
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
     return unless current_user.id == @post.user_id
     @post.destroy
     flash[:notice] = 'Post deleted'
-    redirect_back(fallback_location: root_path)
+    redirect_to root_path
   end
 
   private

@@ -14,6 +14,7 @@ class FriendshipsController < ApplicationController
     else
       flash[:alert] = 'Friend Request Failed!'
     end
+    redirect_to users_path
   end
 
   def accept_friend
@@ -26,7 +27,7 @@ class FriendshipsController < ApplicationController
     else
       flash[:alert] = "Friend request could not be accepted"
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to users_path
   end
 
   def decline_friend
@@ -35,6 +36,6 @@ class FriendshipsController < ApplicationController
 
     @friendship.destroy
     flash[:notice] = "Friend request declined"
-    redirect_back(fallback_location: root_path)
+    redirect_to users_path
   end
 end
