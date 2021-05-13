@@ -31,7 +31,7 @@ gem 'simple_form', '~> 5.1'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'rubocop', '~> 1.13'
-gem 'devise', '~> 4.7', '>= 4.7.3'
+gem 'devise', '~> 4.8'
 gem 'carrierwave', '~> 2.2', '>= 2.2.1'
 gem 'mini_magick', '~> 4.11'
 gem 'omniauth-facebook', '~> 8.0'
