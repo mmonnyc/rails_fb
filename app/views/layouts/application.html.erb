@@ -43,20 +43,23 @@
               <%= link_to 'New Post', new_post_path, class:"button is-link is-inverted is-rounded" %>
             </div>
           </div>
-          <div class="navbar-item">
-            <div class="header-icon">
-              <%= link_to users_path, class:"level-item" do %>
-                <span class="header-icon"><i class="fas fa-user-friends" aria-hidden="true"></i></span>
-              <% end %>
+          <% if current_user.friend_requests.any? %>
+            <div class="navbar-item">
+              <div class="header-icon ">
+                <%= link_to users_path do %> 
+                  <span class="header-icon"><%= current_user.friend_requests.count%><i class="fas fa-bell fa-fw" aria-hidden="true"></i></span>
+                <% end %>
+              </div>
             </div>
-          </div>
-          <div class="navbar-item">
-            <div class="header-icon">
-              <%= link_to users_path, class:"level-item" do %> 
-                <span class="header-icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
-              <% end %>
+          <% else %>
+            <div class="navbar-item">
+              <div class="header-icon">
+                <%= link_to users_path do %>
+                  <span class="header-icon"><i class="fas fa-user-friends" aria-hidden="true"></i></span>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
           <div class="navbar-item has-dropdown is-hoverable">
             <%= link_to 'Account', user_path(current_user), class: "navbar-link" %>
             <div class="navbar-dropdown is-right">

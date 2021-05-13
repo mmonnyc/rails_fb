@@ -1,0 +1,24 @@
+<% current_user.friend_requests.each do |friend| %>
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <%= image_tag friend.image.url if friend.image? %>
+        </figure>
+      </div>
+      <div class="media-content">
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item"><%= friend.full_name %></div>
+          </div>
+          <div class="level-right">
+            <div class="buttons">             
+              <%= link_to "Accept", accept_friend_user_friendships_path(friend), class: "button is-success is-light" %>
+              <%= link_to "Decline", decline_friend_user_friendships_path(friend), class: "button is-danger is-light" %>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </article>
+  </div>
+<% end %>
