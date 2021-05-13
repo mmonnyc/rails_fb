@@ -1,0 +1,5 @@
+<%= comment.likes.count%>
+<%= link_to post_comment_likes_path(post_id: comment.post_id, comment_id: comment.id), method: :post do  %>
+  <span class="icon is-small"><i class="fas fa-thumbs-up" aria-hidden="true"></i></span>
+<% end %>
+

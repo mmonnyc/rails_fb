@@ -7,11 +7,18 @@
   </figure>
   <div class="media-content">
     <div class="content">
-      <p>
         <strong><%= c.user.full_name %></strong>
         <br><%= c.content %><br>
-        <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-      </p>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <a class="level-item">
+              <small><%= render 'likes/comments', { comment: c } %></small>
+            </a>
+            <a class="level-item">
+              <small> · <%= distance_of_time_in_words(c.created_at, Time.now) %> ago</small>
+            </a>
+          </div>
+        </nav>
     </div>
    </div>
 </article>

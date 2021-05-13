@@ -6,13 +6,18 @@
   </figure>
   <div class="media-content">
     <div class="content">
-      <p>
-        <strong><%= post.user.full_name %></strong>
-        <br>
-          <%= post.context %>
-        <br>
-        <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-      </p>
+      <strong><%= post.user.full_name %></strong>
+      <br><%= post.context %><br>
+      <nav class="level is-mobile">
+        <div class="level-left">
+          <a class="level-item">
+            <small><%= render 'likes/posts', { post: post } %></small>
+          </a>
+          <a class="level-item">
+            <small> · <%= distance_of_time_in_words(post.created_at, Time.now) %> ago</small>
+          </a>
+        </div>
+      </nav>
     </div>
     <% if post.comments.any? %>
       <%= render 'comments/comments', { comments: post.comments }%>

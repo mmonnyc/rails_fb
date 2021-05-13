@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   def create
     type = type_subject?(params)[0]
     @subject = type_subject?(params)[1]
-    notice_type = "like-#{type}"
+    # notice_type = "like-#{type}"
     return unless @subject
     if already_liked?(@subject, type)
       dislike(type)
@@ -12,8 +12,8 @@ class LikesController < ApplicationController
       @like = @subject.likes.build(user_id: current_user.id)
       if @like.save
         flash[:success] = "#{type} liked!"
-        @notification = new_notification(@subject.user, @subject.id, notice_type)
-        @notification.save
+        # @notification = new_notification(@subject.user, @subject.id, notice_type)
+        # @notification.save
       else
         flash[:danger] = "#{type} like failed!"
       end

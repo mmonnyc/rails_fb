@@ -44,16 +44,16 @@
             </div>
           </div>
           <div class="navbar-item">
-            <div class="icon">
+            <div class="header-icon">
               <%= link_to users_path, class:"level-item" do %>
-                <span class="icon"><i class="fas fa-user-friends" aria-hidden="true"></i></span>
+                <span class="header-icon"><i class="fas fa-user-friends" aria-hidden="true"></i></span>
               <% end %>
             </div>
           </div>
           <div class="navbar-item">
-            <div class="icon">
+            <div class="header-icon">
               <%= link_to users_path, class:"level-item" do %> 
-                <span class="icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+                <span class="header-icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
               <% end %>
             </div>
           </div>
@@ -63,8 +63,7 @@
               <%= link_to "See Your Profile", user_path(current_user), class:"navbar-item" %>
               <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"navbar-item" %>
             </div>
-          </div>
-            <%= render 'shared/notifications', object: current_user.notifications%> 
+          </div> 
           <% else %>
             <div class="navbar-item">
               <div class="field is-grouped">
