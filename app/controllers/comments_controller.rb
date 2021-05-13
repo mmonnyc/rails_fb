@@ -14,8 +14,6 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     respond_to do |format|
       if @comment.save
-        #@notification = new_notification(@post.user, @post.id, 'comment')
-        #@notification.save
         format.html { redirect_to @post, notice: 'Comment was successfully created' }
       end
     end
@@ -25,7 +23,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     return unless current_user.id == @comment.user_id
     @comment.destroy
-    flash[:success] = 'Comment deleted'
+    flash[:notice] = 'Comment deleted'
     redirect_back(fallback_location: root_path)
   end
 

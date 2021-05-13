@@ -44,11 +44,11 @@ class User < ApplicationRecord
 
   # Users sent requests to other friends
   def pending_requests
-    friendships.map{ |f| f.sent_by if !f.status}.compact
+    friendships.map{ |f| f.sent_to if !f.status}.compact
   end
   # Friend requests for the user 
   def friend_requests
-    inverse_friendships.map{ |f| f.sent_to if !f.status}.compact
+    inverse_friendships.map{ |f| f.sent_by if !f.status}.compact
   end
 
   private 

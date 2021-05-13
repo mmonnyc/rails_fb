@@ -8,17 +8,21 @@
   <div class="card-content">
     <div class="media">
       <div class="media-content">
-        <p class="subtitle is-2"><%= current_user.full_name %></p>
-         <p class="subtitle is-6"><%= link_to 'Edit Profile', edit_user_registration_path %> </p>
+        <p class="subtitle is-2"><%= @user.full_name %></p>
+        <% if current_user == @user %>
+          <div class="buttons">
+            <%= link_to 'Edit Profile', edit_user_registration_path, class: "button is-link is-outlined" %> 
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
 
 <br>
-<p class="subtitle is-3">My Posts</p>
+<p class="subtitle is-3">Posts</p>
 <br>
-<% current_user.posts.each do |p| %>
+<% @user.posts.each do |p| %>
   <%= render 'posts/post',  post: p%>
 <% end %>
   
