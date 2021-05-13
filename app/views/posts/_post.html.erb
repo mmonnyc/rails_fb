@@ -1,7 +1,9 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-      <%= image_tag post.user.image.url if post.user.image? %>
+      <%= link_to user_path(post.user) do %>
+        <%= image_tag post.user.image.url if post.user.image? %>
+      <% end %>
     </p>
   </figure>
   <div class="media-content">
@@ -34,7 +36,9 @@
     <article class="media">
       <figure class="media-left">
         <p class="image is-48x48">
-          <%= image_tag current_user.image.url if current_user.image? %>
+          <%= link_to user_path(current_user) do %>
+            <%= image_tag current_user.image.url if current_user.image? %>
+          <% end %>
         </p>
       </figure>
       <div class="media-content">

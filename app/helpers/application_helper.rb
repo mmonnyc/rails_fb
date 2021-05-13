@@ -19,7 +19,6 @@ module ApplicationHelper
   end
   
   def potential_friends?(user)
-    return true if friend_request_sent?(user)
     return true if friend_request_received?(user)
     return true if current_user.friendships.exists?(sent_to_id: user.id, status: true)
     return true if current_user.inverse_friendships.exists?(sent_by_id: user.id, status: true)

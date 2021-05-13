@@ -3,7 +3,9 @@
     <article class="media">
       <div class="media-left">
         <figure class="image is-48x48">
-          <%= image_tag friend.image.url if friend.image? %>
+          <%= link_to user_path(user) do %>
+            <%= image_tag friend.image.url if friend.image? %>
+          <% end %>  
         </figure>
       </div>
       <div class="media-content">

@@ -2,7 +2,9 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-48x48">
-      <%= image_tag c.user.image.url if c.user.image? %>
+      <%= link_to user_path(c.user) do %>
+        <%= image_tag c.user.image.url if c.user.image? %>
+      <% end %>
     </p>
   </figure>
   <div class="media-content">

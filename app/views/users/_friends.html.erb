@@ -15,7 +15,9 @@
             <article class="media">
               <div class="media-left">
                 <figure class="image is-48x48">
-                  <%= image_tag friend.image.url if friend.image? %>
+                  <%= link_to user_path(friend) do %>
+                    <%= image_tag friend.image.url if friend.image? %>
+                  <% end %>
                 </figure>
               </div>
               <div class="media-content">
@@ -44,7 +46,9 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-48x48">
-                <%= image_tag user.image.url if user.image? %>
+                <%= link_to user_path(user) do %>
+                  <%= image_tag user.image.url if user.image? %>
+                <% end %>
               </figure>
             </div>
             <div class="media-content">
@@ -53,8 +57,12 @@
                   <div class="level-item"><%= user.full_name %></div>
                 </div>
                 <div class="level-right">
-                  <div class="buttons">             
-                    <%= link_to "Send Friend Request", user_friendships_path(user), method: :post, class: "button is-link is-light" %>
+                  <div class="buttons">
+                    <% if friend_request_sent?(user) %>
+                      <button class="button is-link is-outlined is-static">Friend Request Sent</button>
+                    <% else %>            
+                      <%= link_to "Send Friend Request", user_friendships_path(user), method: :post, class: "button is-link is-light" %>
+                    <% end %>
                   </div>
                 </div>
               </nav>
