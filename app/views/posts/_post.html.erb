@@ -17,6 +17,15 @@
             <small> · <%= distance_of_time_in_words(post.created_at, Time.now) %> ago</small>
           </a>
         </div>
+        <% if current_user.id == post.user_id %>
+        <div class="level-right">
+          <a class="level-item">
+            <small><%= link_to post, method: :delete, data: { confirm: "Are you sure you want to delete this post?" } do %>
+              <span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>
+            <% end %></small>
+          </a>
+        </div>     
+        <% end %>
       </nav>
     </div>
     <% if post.comments.any? %>
