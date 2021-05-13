@@ -302,6 +302,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mini_magick (~> 4.11)
+  omniauth (~> 2.0, >= 2.0.4)
   omniauth-facebook (~> 8.0)
   pg (~> 1.1)
   puma (~> 5.0)

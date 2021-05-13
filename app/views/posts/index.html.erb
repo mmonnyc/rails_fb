@@ -1,9 +1,9 @@
-<div class="content">
-  <h1 class="subtitle is-5">Post Your Thoughts, <%= current_user.first_name %></h1>
-  <%= render 'posts/form'%>
-</div>
-<br>
 <% if @feed_posts.any?  %> 
+  <div class="content">
+    <h1 class="subtitle is-5">Post Your Thoughts, <%= current_user.first_name %></h1>
+    <%= render 'posts/form'%>
+  </div>
+  <br>
   <% @feed_posts.each do |p| %>
     <%=  render 'posts/post', { post: p } %>
   <% end %>

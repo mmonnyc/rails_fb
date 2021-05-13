@@ -34,6 +34,7 @@ gem 'rubocop', '~> 1.13'
 gem 'devise', '~> 4.8'
 gem 'carrierwave', '~> 2.2', '>= 2.2.1'
 gem 'mini_magick', '~> 4.11'
+gem 'omniauth', '~> 2.0', '>= 2.0.4'
 gem 'omniauth-facebook', '~> 8.0'
 gem 'bulma-rails', '~> 0.9.1'
 
