@@ -1,34 +1,37 @@
 <div class="block">
-  <strong>Pending Friend Requests</strong>
-  <br><br>
   <% if current_user.friend_requests.any? %>
+    <strong>Pending Friend Requests</strong>
+    <br><br>
     <%= render 'notifications' %>
-  <% else %>
-    <p>You don't have any new requests at the moment</p>
   <% end %>
 </div>
 
 <div class="block">
   <strong>Your Friends List</strong>
   <br><br>
-  <% current_user.friends.each do |friend| %>
-      <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-48x48">
-                <%= image_tag friend.image.url if friend.image? %>
-              </figure>
-            </div>
-            <div class="media-content">
-              <nav class="level">
-                <div class="level-left">
-                  <div class="level-item"><%= friend.full_name %></div>
-                </div>
-              </nav>
-            </div>
-          </article>
-        </div>
+  <% unless current_user.friends.empty? %>
+    <% current_user.friends.each do |friend| %>
+        <div class="box">
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <%= image_tag friend.image.url if friend.image? %>
+                </figure>
+              </div>
+              <div class="media-content">
+                <nav class="level">
+                  <div class="level-left">
+                    <div class="level-item"><%= friend.full_name %></div>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+    <% end %>
+  <% else %>
+    Oh noo, you any friends yet. Be quick to send friendship requests below!
   <% end %>
+  
 </div>
 
 <div class="block">

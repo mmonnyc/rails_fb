@@ -1,3 +1,23 @@
 <% if @feed_posts.any?  %> 
-  <%= render 'shared/feed' %>
-<% end %> 
+  <% @feed_posts.each do |p| %>
+    <%=  render 'posts/post', { post: p } %>
+  <% end %>
+<% else %>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <h2>Hello <%= current_user.full_name %>!</h2> <br>
+            It seems that your news feed is empty.
+            Go on and befriend someone or post your thoughts :)<br>
+          </p>
+            <div class="buttons">             
+              <%= link_to "Search Friends", users_path, class: "button is-link  is-medium" %>
+              <%= link_to 'New Post', new_post_path, class:"button is-link is-light is-outline is-medium" %>
+            </div>
+        </div>
+      </div>
+    </article>
+  </div>
+<% end %>
