@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook]
+         :omniauthable, :omniauth_providers => [:facebook]
   validates :first_name, length: { in: 3..15 }, presence: true
   validates :last_name, length: { in: 3..15 }, presence: true
   validate :picture_size
