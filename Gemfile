@@ -37,6 +37,7 @@ gem 'mini_magick', '~> 4.11'
 gem 'omniauth', '~> 2.0', '>= 2.0.4'
 gem 'omniauth-facebook', '~> 8.0'
 gem 'bulma-rails', '~> 0.9.1'
+gem 'omniauth-rails_csrf_protection', '~> 0.1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
